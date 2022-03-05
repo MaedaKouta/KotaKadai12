@@ -12,18 +12,18 @@ class ViewController: UIViewController {
     @IBOutlet private weak var noneTaxMoneyTextField: UITextField!
     @IBOutlet private weak var taxRateTextField: UITextField!
     @IBOutlet private weak var inTaxMoneyLabel: UILabel!
-    private let taxRateString = "taxRateText"
+    private let taxRateKey = "taxRateText"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        taxRateTextField.text = UserDefaults.standard.string(forKey: taxRateString)
+        taxRateTextField.text = UserDefaults.standard.string(forKey: taxRateKey)
     }
 
     @IBAction private func didTapCalculateButton(_ sender: Any) {
         if let noneTaxMoneyInt = Int(noneTaxMoneyTextField.text ?? ""), let taxRateInt = Int(taxRateTextField.text ?? "") {
             let inTaxMoneyInt = noneTaxMoneyInt + ( noneTaxMoneyInt * taxRateInt / 100 )
             inTaxMoneyLabel.text = String(inTaxMoneyInt)
-            UserDefaults.standard.set(taxRateTextField.text, forKey: taxRateString)
+            UserDefaults.standard.set(taxRateTextField.text, forKey: taxRateKey)
         } else {
             inTaxMoneyLabel.text = ""
         }
